@@ -1,0 +1,42 @@
+name: Telegram to GitHub Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      telegram_url:
+        description: "Telegram message URL"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install tdl
+        run: |
+          curl -sSL https://docs.iyear.me/tdl/install.sh | sudo bash
+
+      - name: Check tdl
+        run: |
+          tdl version
+
+      - name: Show Telegram URL
+        run: |
+          echo "Telegram URL:"
+          echo "${{ inputs.telegram_url }}"
+
+      - name: Download Telegram file
+        run: |
+          mkdir -p downloads
+          tdl dl \
+            -u "${{ inputs.telegram_url }}" \
+            -o downloads
+
+      - name: List downloaded files
+        run: |
+          echo "Downloaded files:"
+          find downloads -type f -printf '%p\n'
