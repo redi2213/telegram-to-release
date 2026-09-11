@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Install tdl
         run: |
           curl -sSL https://docs.iyear.me/tdl/install.sh | sudo bash
@@ -29,7 +30,7 @@ jobs:
           echo "Telegram URL:"
           echo "${{ inputs.telegram_url }}"
 
-            - name: Download Telegram file
+      - name: Download Telegram file
         run: |
           mkdir -p downloads
           cd downloads
