@@ -29,12 +29,11 @@ jobs:
           echo "Telegram URL:"
           echo "${{ inputs.telegram_url }}"
 
-      - name: Download Telegram file
+            - name: Download Telegram file
         run: |
           mkdir -p downloads
-          tdl dl \
-            -u "${{ inputs.telegram_url }}" \
-            -o downloads
+          cd downloads
+          tdl dl -u "${{ inputs.telegram_url }}"
 
       - name: List downloaded files
         run: |
